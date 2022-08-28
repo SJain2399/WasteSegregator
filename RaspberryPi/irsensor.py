@@ -6,7 +6,7 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
 
 sensor_output = 16
-image_count = 10
+image_count = 42
 capture_command_base = "libcamera-jpeg -o image"
 capture_command_parameters = "-t 5 --width 480 --height 480 --shutter 100000"
 
