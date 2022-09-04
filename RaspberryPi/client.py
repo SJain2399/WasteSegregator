@@ -18,7 +18,7 @@ headers = {} #{'Content-type': 'application/json', 'Accept': 'text/plain'}
   
 payload = {} #json.dumps({"image": im_b64, "other_key": "value"})
 
-print("Andar Daal")
+print("Process Started")
 #response = requests.post(api, data=payload, headers=headers, im_bytes)
 #response = requests.get(api)
 response = requests.request("POST", api, headers=headers, data=payload, files=files)
@@ -26,8 +26,8 @@ response = requests.request("POST", api, headers=headers, data=payload, files=fi
 try:
     #data = response.json()
     data = response.text
-    print(data + " " + "baar chod")                
+    print(data)                
 except requests.exceptions.RequestException:
     print(response.text)
     
-print("Baahar Nikaal")
+print("Process Ended")
