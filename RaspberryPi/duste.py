@@ -24,9 +24,7 @@ GPIO.setup(sensor_output, GPIO.IN)
 GPIO.setup(servo_input_1, GPIO.OUT)
 GPIO.setup(servo_input_2, GPIO.OUT)
 motor1 = GPIO.PWM(servo_input_1, pulse_freq) # GPIO 19 for PWM with 50Hz
-motor1.start(7.5) # Initialization
-motor2 = GPIO.PWM(servo_input_2, pulse_freq) # GPIO 30 for PWM with 50Hz
-motor2.start(10.5) # Initialization
+motor2 = GPIO.PWM(servo_input_2, pulse_freq) # GPIO 21 for PWM with 50Hz
 
 #Waste Categories:
 food = "0"
@@ -38,15 +36,17 @@ print("Variables Initialized")
 
 def open_flap():
     print("Flap Mechanism Started")
-    motor2.ChangeDutyCycle(10)
+    motor2.ChangeDutyCycle(6)
     time.sleep(1)
-    motor2.ChangeDutyCycle(10.5)
+    motor2.ChangeDutyCycle(11)
     time.sleep(0.5)
     print("Flap Mechanism Ended")
     return
 
 def invoke_assembly(data):
-    print("Assembly Task Running")
+    print("Assembly Tasks Running")
+    motor1.start(7.5) # Initialization
+    motor2.start(11) # Initialization
     print("Mechanical Assembly Ready")
     
     if(data == food):
@@ -70,6 +70,9 @@ def invoke_assembly(data):
     motor1.ChangeDutyCycle(7.5)
     time.sleep(0.5)
     print("Waste Disposed Successfully")
+    motor1.ChangeDutyCycle(0)
+    motor2.ChangeDutyCycle(0)
+    print("Mechanical Assembly Reset and Stopped")
     return
 
 def segregate():
@@ -103,17 +106,12 @@ def segregate():
     
 print("Functions Loaded")
 print("Starting Garbage Segregator")
+print("Hi! I am Dust-E. I was built by Team SKYRaD.")
+print("I am always hungry. Go ahead and give me something to munch :)")
 
 while 1:
-    print("IR Detection Cycle Started")
     if(GPIO.input(sensor_output) == 0):
         print("Waste Detected")
         segregate()
-        break
-        
-    else:
-        print("No Waste Detected")
-        
-    print("IR Detection Cycle Complete. Everything OK")
 
 print("Garbage Segregator Operations Ended. Everything Alright")
